@@ -1,0 +1,29 @@
+{# Shared responsive foundations for application and authentication shells. #}
+{% set kind = desktop_kind|default('app') %}
+{% set sources = ['vision','platform_console'] if kind == 'platform' else ['vision','market'] if kind == 'register' else ['vision'] if kind in ['auth','register'] else ['vision','dashboard','control','premium','market','business','sage5'] %}
+{% set suffix = '_platform' if kind == 'platform' else '_register' if kind == 'register' else '_auth' if kind in ['auth','register'] else '' %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/workspace_presence.css') }}">
+{# App layouts are compiled into one render-blocking sheet. Both breakpoint
+   families are parsed before first paint; resizing never starts a CSS download. #}
+{% if kind == 'app' %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/workspace_responsive.css') }}?v=20261029-2">
+<script>
+(()=>{'use strict';const query=matchMedia('(min-width:901px)'),root=document.documentElement;
+ const ready=()=>{const mode=query.matches?'desktop':'mobile';root.dataset.sageStyleMode=mode;root.dataset.sageViewport=mode;document.dispatchEvent(new CustomEvent('sage:styles-ready',{detail:{mode}}));};
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+ query.addEventListener('change',ready);
+})();
+</script>
+{% else %}
+<script>
+(()=>{'use strict';const mobile=[{% for name in sources %}{{ url_for('static',filename='css/'~name~'.css')|tojson }}{{ ',' if not loop.last }}{% endfor %}],wide=[{{ url_for('static',filename='css/desktop_foundation'~suffix~'.css')|tojson }},{{ url_for('static',filename='css/sage_desktop.css')|tojson }}],query=matchMedia('(min-width:901px)'),loaded=new Set(),started=new Set(),pending=new Map(),root=document.documentElement;
+  const mode=()=>query.matches?'desktop':'mobile',complete=key=>{loaded.add(key);if(mode()===key){root.dataset.sageStyleMode=key;document.dispatchEvent(new CustomEvent('sage:styles-ready',{detail:{mode:key}}));}};
+  window.SAGEStyleLoaded=key=>{const left=(pending.get(key)||1)-1;pending.set(key,left);if(left===0)complete(key);};
+  function activate(initial=false){const key=mode();if(loaded.has(key)){complete(key);return;}root.dataset.sageStyleMode='loading-'+key;if(started.has(key))return;started.add(key);const files=key==='desktop'?wide:mobile;pending.set(key,files.length);const media=key==='desktop'?'(min-width:901px)':'(max-width:900px)';
+    if(initial){document.write(files.map(href=>`<link rel="stylesheet" href="${href}" media="${media}" data-sage-mode="${key}" onload="window.SAGEStyleLoaded('${key}')" onerror="window.SAGEStyleLoaded('${key}')">`).join(''));}
+    else for(const href of files){const link=document.createElement('link');link.rel='stylesheet';link.href=href;link.media=media;link.dataset.sageMode=key;if('blocking' in link)link.blocking='render';link.onload=link.onerror=()=>window.SAGEStyleLoaded(key);const end=document.querySelector('[data-sage-foundation-end]');if(end)end.before(link);else document.head.append(link);}
+  }activate(true);query.addEventListener('change',()=>activate());})();
+</script>
+<noscript>{% for name in sources %}<link rel="stylesheet" href="{{ url_for('static',filename='css/'~name~'.css') }}" media="(max-width:900px)">{% endfor %}<link rel="stylesheet" href="{{ url_for('static',filename='css/desktop_foundation'~suffix~'.css') }}" media="(min-width:901px)"><link rel="stylesheet" href="{{ url_for('static',filename='css/sage_desktop.css') }}" media="(min-width:901px)"></noscript>
+{% endif %}
+<meta name="sage-foundation-end" content="" data-sage-foundation-end>

@@ -1,0 +1,129 @@
+/* Mobile layouts are owned by sage_mobile.css / sage_mobile_ledger.css. Desktop rules stay here. */
+/* ==========================================================
+   SAGE 4.0 BUSINESS UI — POLISHED, FAST, RESPONSIVE
+   New modules inherit the approved SAGE shell; desktop entry forms use fixed modals while mobile keeps compact inline disclosures.
+   ========================================================== */
+.v4-workspace{--v4-accent:var(--blue,#19aeb6);--v4-accent-soft:color-mix(in srgb,var(--v4-accent) 10%,transparent);--v4-line:color-mix(in srgb,var(--border) 78%,transparent);min-width:0;display:grid;gap:20px;isolation:auto}.v4-workspace>*{min-width:0}.v4-workspace h1,.v4-workspace h2,.v4-workspace h3{letter-spacing:-.025em}.v4-workspace h2{margin:0 0 8px;font-size:calc(clamp(18px,1.7vw,24px) * var(--sage-text-scale,1))}.v4-workspace h3{margin:0;font-size:calc(14px * var(--sage-text-scale,1))}.v4-workspace p{line-height:1.58}.v4-workspace .page-heading{position:relative;margin-bottom:2px;padding:4px 0 12px}.v4-workspace .page-heading::after{content:"";display:block;width:54px;height:3px;margin-top:14px;border-radius:99px;background:linear-gradient(90deg,var(--v4-accent),color-mix(in srgb,var(--v4-accent) 35%,transparent))}.v4-workspace .page-heading h1{margin:0;font-size:calc(clamp(27px,2.5vw,38px) * var(--sage-text-scale,1));line-height:1.05}.v4-workspace .page-heading p{margin:10px 0 0;color:var(--muted);font-size:calc(12px * var(--sage-text-scale,1));max-width:880px}.v4-workspace a{text-decoration:none;text-underline-offset:3px}.v4-workspace table a{color:var(--v4-accent);font-weight:750}.v4-workspace table a:hover{text-decoration:underline}
+
+/* KPI / summary strip */
+.v4-workspace .control-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}.v4-workspace .control-metrics>article{position:relative;overflow:hidden;min-height:96px;padding:17px 18px;border:1px solid var(--v4-line);border-radius:15px;background:linear-gradient(145deg,color-mix(in srgb,var(--surface) 97%,var(--v4-accent) 3%),var(--surface-2));box-shadow:0 8px 28px color-mix(in srgb,#000 5%,transparent);contain:layout paint}.v4-workspace .control-metrics>article::before{content:"";position:absolute;left:0;top:16px;width:3px;height:28px;border-radius:0 5px 5px 0;background:var(--v4-accent);opacity:.8}.v4-workspace .control-metrics span{display:block;color:var(--muted);font-size:calc(10px * var(--sage-text-scale,1));font-weight:700;letter-spacing:.01em}.v4-workspace .control-metrics strong{display:block;margin-top:12px;font-size:calc(20px * var(--sage-text-scale,1));line-height:1;font-weight:850;letter-spacing:-.035em}
+
+/* Disclosure / action cards */
+.v4-workspace .control-disclosure{border:1px solid var(--v4-line);border-radius:15px;background:color-mix(in srgb,var(--surface) 97%,transparent);box-shadow:0 8px 24px color-mix(in srgb,#000 4%,transparent);overflow:hidden}.v4-workspace .control-disclosure>summary{list-style:none;min-height:58px;padding:0 18px;display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none;color:var(--text);transition:background .14s ease,color .14s ease}.v4-workspace .control-disclosure>summary::-webkit-details-marker{display:none}.v4-workspace .control-disclosure>summary::before{content:"+";width:28px;height:28px;display:grid;place-items:center;flex:0 0 auto;border-radius:9px;background:var(--v4-accent-soft);color:var(--v4-accent);font-size:calc(18px * var(--sage-text-scale,1));font-weight:500;transition:transform .16s ease,background .16s ease}.v4-workspace .control-disclosure[open]>summary::before{content:"−"}.v4-workspace .control-disclosure>summary:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--v4-accent) 7%,transparent),color-mix(in srgb,var(--blue,#2457ff) 3%,transparent));color:var(--v4-accent)}.v4-workspace .control-disclosure>summary strong{font-size:calc(12px * var(--sage-text-scale,1));font-weight:800}.v4-workspace .control-disclosure>div{padding:18px;border-top:1px solid var(--v4-line)}
+
+/* Forms — cleaner, richer and more compact than the generated defaults */
+.v4-form,.v4-workspace>.control-form{position:relative}.v4-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 16px}.v4-wide{grid-column:1/-1}.v4-form label,.v4-workspace>.control-form label{display:grid;gap:7px;min-width:0;color:var(--muted);font-size:calc(10px * var(--sage-text-scale,1));font-weight:780}.v4-form input,.v4-form select,.v4-form textarea,.v4-workspace>.control-form input,.v4-workspace>.control-form select{width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:0 14px;border:1px solid color-mix(in srgb,var(--border) 88%,transparent);border-radius:11px;background:color-mix(in srgb,var(--surface-2) 92%,var(--surface));color:var(--text);font-size:calc(11.5px * var(--sage-text-scale,1));font-weight:650;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 4%,transparent);transition:border-color .14s ease,box-shadow .14s ease,background .14s ease}.v4-form textarea{min-height:100px;padding:13px 14px;resize:vertical;line-height:1.5}.v4-form input:hover,.v4-form select:hover,.v4-form textarea:hover{border-color:color-mix(in srgb,var(--v4-accent) 35%,var(--border))}.v4-form input:focus,.v4-form select:focus,.v4-form textarea:focus,.v4-workspace>.control-form input:focus,.v4-workspace>.control-form select:focus{border-color:color-mix(in srgb,var(--v4-accent) 72%,var(--border));background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--v4-accent) 11%,transparent)}.v4-form input[type="file"]{min-height:48px;padding:9px}.v4-form input[type="file"]::file-selector-button{height:28px;margin-right:10px;padding:0 10px;border:0;border-radius:7px;background:var(--v4-accent-soft);color:var(--v4-accent);font:inherit;font-weight:800;cursor:pointer}.v4-form .btn,.v4-workspace>.control-form .btn{min-height:42px;margin-top:14px;padding:0 17px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px color-mix(in srgb,var(--v4-accent) 15%,transparent);transition:transform .15s ease,box-shadow .15s ease,filter .15s ease,border-color .15s ease}.v4-form .btn:hover,.v4-workspace>.control-form .btn:hover{transform:translateY(-1px);filter:saturate(1.06);box-shadow:0 11px 24px color-mix(in srgb,var(--v4-accent) 20%,transparent)}.v4-form .btn.primary,.v4-workspace>.control-form .btn.primary{border-color:transparent;background:linear-gradient(135deg,color-mix(in srgb,var(--v4-accent) 92%,#fff 8%),color-mix(in srgb,var(--v4-accent) 78%,#2c75ff 22%));color:#fff}.v4-form .btn:disabled{opacity:.55;cursor:wait;transform:none}.v4-form .control-form-message{min-height:18px;margin:10px 0 0;color:var(--green,#35b784);font-size:calc(10px * var(--sage-text-scale,1));font-weight:750}.v4-workspace .control-form-message[data-error=true]{color:var(--danger,#df6060)}
+
+/* Search */
+.v4-search-shell{position:relative;width:min(100%,520px);display:grid;gap:7px}.v4-search-shell>span{color:var(--muted);font-size:calc(10px * var(--sage-text-scale,1));font-weight:780}.v4-search-shell::after{content:"⌕";position:absolute;right:14px;bottom:12px;color:var(--muted);font-size:calc(19px * var(--sage-text-scale,1));pointer-events:none}.v4-search{width:100%;min-height:47px;padding:0 42px 0 14px!important;border:1px solid var(--v4-line)!important;border-radius:11px!important;background:color-mix(in srgb,var(--surface) 94%,var(--surface-2))!important;color:var(--text)!important;font-size:calc(11.5px * var(--sage-text-scale,1)) !important;box-shadow:0 5px 18px color-mix(in srgb,#000 3%,transparent)!important}.v4-search:focus{border-color:color-mix(in srgb,var(--v4-accent) 70%,var(--border))!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--v4-accent) 10%,transparent)!important}
+
+/* Tables */
+.v4-workspace .table-wrap{position:relative;max-width:100%;overflow:auto;border:1px solid var(--v4-line);border-radius:14px;background:var(--surface);box-shadow:0 10px 28px color-mix(in srgb,#000 4%,transparent);scrollbar-width:thin;content-visibility:auto;contain-intrinsic-size:520px}.v4-workspace table{width:100%;min-width:720px;border-collapse:separate;border-spacing:0;text-align:left}.v4-workspace th,.v4-workspace td{padding:13px 14px;border-bottom:1px solid var(--v4-line);vertical-align:middle}.v4-workspace th{position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--surface-2) 96%,var(--v4-accent) 4%);color:var(--text);font-size:calc(10px * var(--sage-text-scale,1));font-weight:850;letter-spacing:.015em;white-space:nowrap}.v4-workspace td{font-size:calc(11px * var(--sage-text-scale,1));line-height:1.45}.v4-workspace tbody tr{transition:background .11s ease}.v4-workspace tbody tr:hover{background:color-mix(in srgb,var(--v4-accent) 4.5%,transparent)}.v4-workspace tbody tr:last-child td{border-bottom:0}.v4-empty-row td{text-align:center!important;padding:34px 16px!important;color:var(--muted)!important;font-size:calc(11px * var(--sage-text-scale,1)) !important}.v4-empty-row td::before{content:"◇";display:block;margin:0 auto 8px;color:var(--v4-accent);font-size:calc(21px * var(--sage-text-scale,1));opacity:.75}
+
+/* Detail / record surfaces */
+.v4-detail{padding:21px;display:grid;gap:17px;min-width:0;border-radius:17px!important;background:linear-gradient(150deg,color-mix(in srgb,var(--surface) 98%,var(--v4-accent) 2%),var(--surface))!important;box-shadow:0 12px 34px color-mix(in srgb,#000 5%,transparent)!important}.v4-detail>h2{display:flex;align-items:center;gap:10px}.v4-detail>h2::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--v4-accent);box-shadow:0 0 0 5px var(--v4-accent-soft)}.v4-workspace .v4-actions{display:flex;gap:9px;flex-wrap:wrap}.v4-workspace .v4-actions .btn{border-radius:9px}.v4-workspace time{font-variant-numeric:tabular-nums}
+
+/* Desktop modal conversion for action disclosures containing forms */
+.v4-modal-scrim{position:fixed;inset:0;z-index:148;border:0;background:rgba(15,23,42,.18);opacity:0;pointer-events:none;transition:opacity .16s ease;cursor:default}.v4-modal-scrim.open{opacity:1;pointer-events:auto}.v4-modal-disclosure>.v4-modal-panel{scrollbar-width:thin}.v4-modal-head{display:none}.v4-modal-kicker{display:inline-flex;align-items:center;min-height:24px;padding:0 9px;border:1px solid color-mix(in srgb,var(--v4-accent) 18%,transparent);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--v4-accent) 13%,var(--surface)),color-mix(in srgb,var(--blue,#2457ff) 8%,var(--surface)));color:var(--v4-accent);font-size:calc(8px * var(--sage-text-scale,1));font-weight:900;letter-spacing:.09em;text-transform:uppercase}.v4-modal-close{width:38px;height:38px;padding:0;border:1px solid color-mix(in srgb,var(--border) 82%,transparent);border-radius:11px;background:linear-gradient(145deg,var(--surface),var(--surface-2));color:var(--muted);display:grid;place-items:center;font-size:calc(21px * var(--sage-text-scale,1));font-weight:600;line-height:1;cursor:pointer;box-shadow:0 6px 18px color-mix(in srgb,#000 6%,transparent);transition:background .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease,transform .15s ease}.v4-modal-close:hover,.v4-modal-close:focus-visible{border-color:color-mix(in srgb,var(--red,#ff4d5f) 55%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--red,#ff4d5f) 14%,var(--surface)),color-mix(in srgb,var(--red,#ff4d5f) 22%,var(--surface-2)));color:var(--red,#ff4d5f);box-shadow:0 8px 22px color-mix(in srgb,var(--red,#ff4d5f) 18%,transparent);transform:translateY(-1px) rotate(3deg)}.v4-modal-close:active{transform:translateY(0) scale(.96)}
+@media(min-width:821px){body.v4-modal-open{overflow:hidden}.v4-modal-disclosure{overflow:visible!important}.v4-modal-disclosure>summary{min-height:56px}.v4-modal-disclosure[open]>summary{background:linear-gradient(90deg,color-mix(in srgb,var(--v4-accent) 7%,transparent),transparent)}.v4-modal-disclosure[open]>.v4-modal-panel{position:fixed;z-index:150;left:50%;top:50%;width:min(860px,calc(100vw - 64px));max-height:min(84vh,800px);padding:0!important;border:1px solid color-mix(in srgb,var(--v4-accent) 24%,var(--border))!important;border-radius:20px!important;background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 98%,#fff 2%),color-mix(in srgb,var(--surface) 96%,var(--v4-accent) 4%))!important;box-shadow:0 28px 80px rgba(15,23,42,.22),0 0 0 1px color-mix(in srgb,#fff 40%,transparent) inset!important;overflow:auto!important;opacity:1!important;filter:none!important;backdrop-filter:none!important;transform:translate(-50%,-50%);animation:v4ModalIn .16s cubic-bezier(.2,.8,.2,1) both}.v4-modal-disclosure[open]>.v4-modal-panel::before{content:"";position:sticky;top:0;z-index:6;display:block;height:4px;margin-bottom:-4px;background:linear-gradient(90deg,var(--v4-accent),var(--blue,#2457ff),var(--green,#00c78a));pointer-events:none}.v4-modal-disclosure[open]>.v4-modal-panel>.v4-modal-head{position:sticky;top:4px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px 14px;border-bottom:1px solid color-mix(in srgb,var(--v4-accent) 12%,var(--border));background:var(--surface);box-shadow:0 8px 20px color-mix(in srgb,#000 3%,transparent);backdrop-filter:none}.v4-modal-head-copy{display:grid;gap:6px}.v4-modal-head h3{font-size:calc(17px * var(--sage-text-scale,1));line-height:1.2}.v4-modal-content{padding:20px}.v4-modal-content .v4-form-grid{gap:16px 18px}.v4-modal-content .v4-form label{font-size:calc(10.5px * var(--sage-text-scale,1));color:color-mix(in srgb,var(--text) 63%,var(--muted))}.v4-modal-content .v4-form input,.v4-modal-content .v4-form select,.v4-modal-content .v4-form textarea{background:color-mix(in srgb,var(--surface) 94%,var(--v4-accent) 6%);border-color:color-mix(in srgb,var(--border) 82%,var(--v4-accent) 18%);box-shadow:0 2px 8px color-mix(in srgb,#000 2.5%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 45%,transparent)}.v4-modal-content .v4-form input:hover,.v4-modal-content .v4-form select:hover,.v4-modal-content .v4-form textarea:hover{border-color:color-mix(in srgb,var(--v4-accent) 45%,var(--border));background:color-mix(in srgb,var(--surface) 90%,var(--v4-accent) 10%)}.v4-modal-content .v4-form input:focus,.v4-modal-content .v4-form select:focus,.v4-modal-content .v4-form textarea:focus{border-color:var(--v4-accent);background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--v4-accent) 13%,transparent),0 8px 20px color-mix(in srgb,var(--v4-accent) 7%,transparent)}.v4-modal-content .v4-form .btn.primary{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}.v4-modal-content .v4-form .btn.primary:hover{transform:translateY(-1px);filter:saturate(1.08);box-shadow:0 10px 24px color-mix(in srgb,var(--v4-accent) 24%,transparent)}.v4-modal-content>.table-wrap:first-child{margin-top:0}.v4-modal-disclosure[open]>summary::before{transform:rotate(45deg)}@keyframes v4ModalIn{from{opacity:0;transform:translate(-50%,calc(-50% + 10px)) scale(.99)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}}
+
+/* Mobile keeps the disclosure model, but with a compact, stable layout. */
+
+
+@media(prefers-reduced-motion:reduce){.v4-workspace *,.v4-modal-scrim{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* =================================================================================================
+   SAGE AI DRAWER — PREMIUM REDESIGN
+   Complete shell refresh with better light/slate/dark contrast, compact prompt cards, modern chat bubbles,
+   emoji support, copy actions, composer helper states and a visually rich but controlled look.
+   ================================================================================================= */
+:root{--ai-brand-1:#19c6d1;--ai-brand-2:#655dff;--ai-brand-3:#21d59a;--ai-brand-4:#ffae4c;--ai-user-1:#4f67ff;--ai-user-2:#7357ff}
+html[data-theme="dark"]{--ai-panel:#09111a;--ai-panel-2:#0d1823;--ai-panel-3:#101d2a;--ai-card:#0f1b28;--ai-card-2:#132334;--ai-chat-bg:#0a131d;--ai-text:#eef4ff;--ai-sub:#9eb0c8;--ai-line:rgba(154,189,225,.14);--ai-shadow:0 24px 80px rgba(0,0,0,.48);--ai-backdrop:rgba(2,8,16,.46)}
+html[data-theme="slate"],html[data-theme="deep-rich"]{--ai-panel:#0d131b;--ai-panel-2:#101925;--ai-panel-3:#122031;--ai-card:#111d2a;--ai-card-2:#162436;--ai-chat-bg:#0d1620;--ai-text:#f3f7ff;--ai-sub:#a4b1c7;--ai-line:rgba(166,186,215,.16);--ai-shadow:0 24px 84px rgba(3,8,16,.45);--ai-backdrop:rgba(7,11,19,.44)}
+html[data-theme="light"],html[data-theme="warm-neutral"],html[data-theme="modern-minimal"],html[data-theme="sage-cream"],html[data-theme="soft-airy"],html[data-theme="earthy-neutral"],html[data-theme="muted-luxury"],html[data-theme="sage-blush"],html[data-theme="sage-teal"],html[data-theme="sage-lavender"],html[data-theme="sage-charcoal"],html[data-theme="sage-terracotta"],html[data-theme="sage-navy"],html[data-theme="mustard-forward"]{--ai-panel:#fbfdff;--ai-panel-2:#f5f9ff;--ai-panel-3:#eef6ff;--ai-card:#ffffff;--ai-card-2:#f7fbff;--ai-chat-bg:#f7fbff;--ai-text:#192331;--ai-sub:#627286;--ai-line:rgba(76,101,136,.16);--ai-shadow:0 18px 64px rgba(26,42,74,.16);--ai-backdrop:rgba(120,149,190,.18)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes sageAiTyping{0%,80%,100%{transform:translateY(0);opacity:.22}40%{transform:translateY(-5px);opacity:1}}
+
+
+
+
+
+@media (max-width:980px){}
+
+
+
+/* =================================================================================================
+   SAGE AI CHAT — COMPACT CONVERSATION-FIRST PASS
+   Suggestions are temporary/compact; the transcript always owns the main drawer area.
+   ================================================================================================= */
+
+
+
+
+
+
+
+
+
+/* ========================================================================== */
+/* SAGE 5.0 — V4 PORTALLED DIALOG FIX                                         */
+/* The business module moves its panel to <body>; style the live panel itself  */
+/* instead of relying on the old parent > child selector after portal.         */
+/* ========================================================================== */
+@media(min-width:821px){
+  body.v4-dialog-open,body.v4-modal-open{overflow:hidden!important;overscroll-behavior:none!important}
+  body>.v4-modal-panel.v4-dialog-live{position:fixed!important;z-index:150!important;left:50%!important;top:50%!important;width:min(860px,calc(100vw - 64px))!important;max-height:min(84dvh,800px)!important;padding:0!important;border:1px solid color-mix(in srgb,var(--v4-accent,#2457ff) 24%,var(--border))!important;border-radius:20px!important;background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 98%,#fff 2%),color-mix(in srgb,var(--surface) 96%,var(--v4-accent,#2457ff) 4%))!important;box-shadow:0 28px 80px rgba(15,23,42,.22),0 0 0 1px color-mix(in srgb,#fff 40%,transparent) inset!important;overflow:auto!important;opacity:1!important;visibility:visible!important;filter:none!important;backdrop-filter:none!important;transform:translate(-50%,-50%)!important;animation:none!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+  body>.v4-modal-panel.v4-dialog-live.v4-dialog-sm{width:min(560px,calc(100vw - 64px))!important}
+  body>.v4-modal-panel.v4-dialog-live.v4-dialog-md{width:min(700px,calc(100vw - 64px))!important}
+  body>.v4-modal-panel.v4-dialog-live.v4-dialog-lg{width:min(860px,calc(100vw - 64px))!important}
+  body>.v4-modal-panel.v4-dialog-live.v4-dialog-xl{width:min(1040px,calc(100vw - 64px))!important}
+  body>.v4-modal-panel.v4-dialog-live::before{content:"";position:sticky;top:0;z-index:8;display:block;height:4px;margin-bottom:-4px;background:linear-gradient(90deg,var(--v4-accent,#2457ff),var(--blue,#2457ff),var(--green,#00c78a));pointer-events:none}
+  body>.v4-modal-panel.v4-dialog-live>.v4-modal-head{position:sticky!important;top:4px!important;z-index:7!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;padding:16px 19px 15px!important;border-bottom:1px solid color-mix(in srgb,var(--v4-accent,#2457ff) 15%,var(--border))!important;background:color-mix(in srgb,var(--surface) 97%,transparent)!important;box-shadow:0 8px 20px color-mix(in srgb,#000 3%,transparent)!important;backdrop-filter:blur(14px)!important}
+  body>.v4-modal-panel.v4-dialog-live>.v4-modal-head h3{font-size:calc(20px * var(--sage-text-scale,1)) !important;font-weight:900!important;letter-spacing:-.025em!important}
+  body>.v4-modal-panel.v4-dialog-live>.v4-modal-content{padding:21px!important}
+  body>.v4-modal-panel.v4-dialog-live .v4-form label{font-size:calc(11px * var(--sage-text-scale,1)) !important;font-weight:800!important}
+  body>.v4-modal-panel.v4-dialog-live .v4-form :is(input,select,textarea){font-size:calc(12px * var(--sage-text-scale,1)) !important}
+  body>.v4-modal-panel.v4-dialog-live .v4-form .btn{min-height:44px!important;font-size:calc(11px * var(--sage-text-scale,1)) !important;font-weight:850!important;transform:none!important}
+}
+
+/* ==========================================================
+   SAGE 5.0 — BUSINESS MODAL RICHNESS PASS
+   Gives Record Sale, Open Fund, Daily Reconciliation and all
+   V4 organization/business dialogs the same premium hierarchy.
+   ========================================================== */
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head{align-items:flex-start!important;gap:13px!important}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-head-icon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,var(--v4-accent,#2457ff),color-mix(in srgb,var(--v4-accent,#2457ff) 58%,#06b6d4));color:#fff;box-shadow:0 10px 24px color-mix(in srgb,var(--v4-accent,#2457ff) 20%,transparent)}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-head-icon svg{width:19px;height:19px}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-head-copy{min-width:0;display:grid;gap:4px;flex:1}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-kicker{width:max-content;min-height:22px;padding:0 8px;font-size:calc(7px * var(--sage-text-scale,1)) !important;letter-spacing:.105em!important}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-kicker::after{content:attr(data-meta);margin-left:7px;padding-left:7px;border-left:1px solid color-mix(in srgb,var(--v4-accent,#2457ff) 23%,var(--border));opacity:.78}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-subtitle{margin:1px 0 0!important;max-width:620px;color:var(--muted);font-size:calc(9.5px * var(--sage-text-scale,1)) !important;line-height:1.45!important;font-weight:580}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-flow{display:flex;align-items:center;gap:6px;margin-top:5px;color:var(--muted);font-size:calc(7px * var(--sage-text-scale,1));font-weight:850;letter-spacing:.035em}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-flow span{padding:4px 6px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border)}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-flow span.active{color:var(--v4-accent,#2457ff);background:color-mix(in srgb,var(--v4-accent,#2457ff) 8%,var(--surface));border-color:color-mix(in srgb,var(--v4-accent,#2457ff) 18%,var(--border))}
+body>.v4-modal-panel.v4-dialog-live>.v4-modal-head .v4-modal-flow i{display:block;width:18px;height:1px;background:linear-gradient(90deg,var(--v4-accent,#2457ff),color-mix(in srgb,var(--v4-accent,#2457ff) 12%,var(--border)))}
+body>.v4-modal-panel.v4-dialog-live .v4-form-grid{gap:12px!important}
+body>.v4-modal-panel.v4-dialog-live .v4-form label{position:relative;overflow:hidden;min-height:76px;padding:11px 12px!important;border-radius:13px!important;transition:border-color .15s ease,background-color .15s ease,box-shadow .15s ease!important}
+body>.v4-modal-panel.v4-dialog-live .v4-form label::before{content:"";position:absolute;left:0;top:11px;bottom:11px;width:3px;border-radius:0 4px 4px 0;background:var(--v4-accent,#2457ff);opacity:.6}
+body>.v4-modal-panel.v4-dialog-live .v4-form label:nth-child(3n+2)::before{background:#06b6d4}
+body>.v4-modal-panel.v4-dialog-live .v4-form label:nth-child(3n)::before{background:#f59e0b}
+body>.v4-modal-panel.v4-dialog-live .v4-form .v4-field-caption{font-size:calc(9px * var(--sage-text-scale,1)) !important;font-weight:900!important;letter-spacing:.04em!important;text-transform:uppercase;color:color-mix(in srgb,var(--v4-accent,#2457ff) 55%,var(--text))!important}
+body>.v4-modal-panel.v4-dialog-live .v4-form label:focus-within::before{opacity:1;box-shadow:0 0 12px color-mix(in srgb,var(--v4-accent,#2457ff) 30%,transparent)}
+body>.v4-modal-panel.v4-dialog-live .v4-form input[type="file"]::file-selector-button{background:color-mix(in srgb,var(--v4-accent,#2457ff) 10%,var(--surface));color:var(--v4-accent,#2457ff);border:1px solid color-mix(in srgb,var(--v4-accent,#2457ff) 15%,var(--border));border-radius:8px;font-weight:850}
+body>.v4-modal-panel.v4-dialog-live .control-form-message{padding:8px 10px;border-radius:9px;background:color-mix(in srgb,#10b981 6%,var(--surface));border:1px solid color-mix(in srgb,#10b981 14%,var(--border));font-size:calc(9px * var(--sage-text-scale,1)) !important}
+body>.v4-modal-panel.v4-dialog-live .v4-form>.btn.primary{min-height:46px!important;padding:0 20px!important;border-radius:11px!important;font-size:calc(11px * var(--sage-text-scale,1)) !important;letter-spacing:.01em!important}

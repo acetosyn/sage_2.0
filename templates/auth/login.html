@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#07090f">
+  <title>Sign in · SAGE</title>
+  <script>
+    /* SAGE THEME PRE-PAINT: apply the saved appearance before CSS/browser paint so the chosen mood palette appears instantly on reload. */
+    (()=>{try{const colors={'dark':'#050505', 'light':'#f6f7f9', 'slate':'#111720', 'classic-sage-mustard':'#E8EFE2', 'warm-neutral':'#FDF8EE', 'modern-minimal':'#F3F6EF', 'deep-rich':'#243225', 'sage-blush':'#F9EFEF', 'sage-navy':'#E9EFE8', 'sage-terracotta':'#F7EEE8', 'sage-cream':'#FFFDF6', 'sage-charcoal':'#F6F7F4', 'mustard-forward':'#FFF5D6', 'sage-teal':'#E8F3F0', 'sage-lavender':'#F4F0FA', 'warm-earthy':'#FDF8EE', 'soft-airy':'#FFF9F0', 'earthy-neutral':'#F7EFE4', 'muted-luxury':'#E6E8D9'},darkThemes=['dark', 'slate', 'deep-rich'],saved=localStorage.getItem('sage-theme')||localStorage.getItem('vision-theme')||'dark',theme=Object.prototype.hasOwnProperty.call(colors,saved)?saved:'dark',html=document.documentElement;html.dataset.theme=theme;html.style.backgroundColor=colors[theme];html.style.colorScheme=darkThemes.includes(theme)?'dark':'light';const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute('content',colors[theme]);}catch(_){}})();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sage_login.css') }}?v=20261029">
+</head>
+<body class="auth-body">
+  {% include 'partials/icon_sprite.html' %}
+  <!-- SAGE LOGIN — live HTML/CSS, a quiet brand panel and compact orbital detail. -->
+  <main class="auth-shell">
+    <section class="login-brand" aria-labelledby="loginHeadline">
+      <a class="login-wordmark" href="/login" aria-label="SAGE"><span class="login-mark"><i></i></span><span aria-hidden="true">SΛGE</span></a>
+      <div class="login-intro"><span class="login-eyebrow"><i></i> Business clarity, every day</span><h1 id="loginHeadline">Your business.<br><em>In balance.</em></h1><p>Money, people and operations.<br>One clear view.</p><div class="login-topics"><span>Finance</span><span>Operations</span><span>Insights</span></div></div>
+      <footer class="login-brand-footer">
+        <div class="login-orbit" aria-hidden="true"><span class="orbit-track track-one"><i></i></span><span class="orbit-track track-two"><i></i></span><span class="orbit-track track-three"><i></i></span><span class="orbit-core"><span class="login-mark"><i></i></span></span></div>
+        <div class="login-credit"><small>Created by</small><strong>Adetomi Adetoye</strong><span>Founder &amp; Owner, SAGE</span></div>
+      </footer>
+    </section>
+    <section class="auth-form-panel" aria-labelledby="signinTitle">
+      <button type="button" class="icon-button auth-theme" id="authTheme" aria-label="Switch light or dark theme"><svg class="sun-icon"><use href="#i-sun"/></svg><svg class="moon-icon"><use href="#i-moon"/></svg></button>
+      <div class="auth-form-wrap">
+        <a class="login-wordmark login-mobile-brand" href="/login" aria-label="SAGE"><span class="login-mark"><i></i></span><span aria-hidden="true">SΛGE</span></a>
+        <span class="login-security"><svg aria-hidden="true"><use href="#i-shield"/></svg> Your workspace awaits</span>
+        <h2 id="signinTitle">Welcome <span>back.</span></h2><p class="login-description">Sign in to your SAGE workspace.</p>
+        <form id="loginForm" class="auth-form">
+          <label for="loginEmail">Email address<span class="login-input"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg><input id="loginEmail" name="email" type="email" placeholder="you@company.com" required autocomplete="email"></span></label>
+          <label for="loginPassword">Password<span class="login-input password-field"><svg aria-hidden="true"><use href="#i-lock"/></svg><input id="loginPassword" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password"><button type="button" class="icon-button compact" data-toggle-password aria-label="Show or hide password"><svg aria-hidden="true"><use href="#i-eye"/></svg></button></span></label>
+          <div class="auth-form-row"><label class="check-row"><input name="remember" type="checkbox" checked> Remember me</label><button type="button" class="auth-text-action" id="changePasswordOpen">Change password</button></div>
+          <div class="form-message" id="loginMessage" role="status" aria-live="polite"></div>
+          <button type="submit" class="btn primary auth-submit"><span>Sign in to SAGE</span><svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></button>
+        </form>
+        <div class="auth-switch">New to SAGE? <a href="/register">Create a workspace <span aria-hidden="true">↗</span></a></div>
+        <details class="login-help"><summary><svg aria-hidden="true"><use href="#i-lock"/></svg> Need help signing in?<span aria-hidden="true">+</span></summary><p>Forgot your password? Contact your SAGE developer for a temporary password, then use Change password to set your own.</p></details>
+        <div class="login-form-footer"><span><svg aria-hidden="true"><use href="#i-shield"/></svg> Organization · Staff · Individual</span><a href="/platform-admin/login" target="_blank" rel="noopener">Developer / Admin ↗</a></div>
+        <p class="login-mobile-credit">Created by <strong>Adetomi Adetoye</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================
+       SELF-SERVICE PASSWORD CHANGE — email/login identifier is immutable.
+       ================================================================ -->
+  <div class="auth-password-backdrop" id="changePasswordModal" aria-hidden="true"><section class="auth-password-card" role="dialog" aria-modal="true" aria-label="Change your password"><header><div><span class="auth-kicker">ACCOUNT SECURITY</span><h2>Change your password</h2><p>Your email remains your SAGE login. Only the password is changed.</p></div><button type="button" class="icon-button compact" id="changePasswordClose" aria-label="Close">×</button></header><form class="auth-form" id="changePasswordForm"><label>Email / login<input name="email" type="email" required autocomplete="email" placeholder="you@company.com"></label><label>Current password<div class="password-field"><input name="current_password" type="password" required autocomplete="current-password"><button type="button" class="icon-button compact" data-toggle-password><svg><use href="#i-eye"/></svg></button></div></label><div class="auth-password-grid"><label>New password<div class="password-field"><input name="new_password" type="password" required minlength="8" autocomplete="new-password"><button type="button" class="icon-button compact" data-toggle-password><svg><use href="#i-eye"/></svg></button></div></label><label>Confirm new password<div class="password-field"><input name="confirm_password" type="password" required minlength="8" autocomplete="new-password"><button type="button" class="icon-button compact" data-toggle-password><svg><use href="#i-eye"/></svg></button></div></label></div><div class="form-message" id="changePasswordMessage"></div><div class="auth-password-actions"><button type="button" class="btn secondary" id="changePasswordCancel">Cancel</button><button type="submit" class="btn primary">Update password</button></div></form></section></div>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

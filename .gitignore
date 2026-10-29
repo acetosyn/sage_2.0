@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.env
+vision_dev.db
+instance/
+storage/backups/
+.DS_Store

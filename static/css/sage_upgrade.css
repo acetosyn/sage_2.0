@@ -1,0 +1,85 @@
+
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span,
+:is(.income-insight-grid,.expense-insight-grid)>article,.finance-kpi){position:relative!important;min-width:0!important;padding-right:100px!important;box-sizing:border-box!important}
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span>strong,
+:is(.income-insight-grid,.expense-insight-grid)>article>strong){display:block!important;white-space:normal!important;overflow-wrap:anywhere;line-height:1.3!important}
+body:not(#sage-upgrade-scope) :is(:is(.sage-ref-card,.sage5-kpi-rich)>:is(.sage5-kpi-glyph,.finance-kpi-icon)){position:absolute!important;inset:12px 14px auto auto!important;width:32px!important;height:32px!important;transform:none!important;margin:0!important}
+body:not(#sage-upgrade-scope) :is(.sage-ref-card:has(>.finance-kpi-icon)>.sage5-kpi-glyph){display:none!important}
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span>.sage-ref-signal,
+:is(.income-insight-grid,.expense-insight-grid)>article>.sage-ref-signal,
+.finance-kpi.sage-ref-card>.sage-ref-signal){position:absolute!important;inset:auto 14px 10px auto!important;width:66px!important;height:20px!important;transform:none!important;margin:0!important}
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span>.market-vital){display:none!important}
+body:not(#sage-upgrade-scope) :is(:is(.owner-history-table,.staff-history-table)){table-layout:auto!important;width:100%!important;min-width:1680px!important}
+body:not(#sage-upgrade-scope) :is(:is(.owner-history-table,.staff-history-table) :is(th,td)){box-sizing:border-box!important;vertical-align:middle!important;overflow-wrap:anywhere!important}
+body:not(#sage-upgrade-scope) :is(.owner-history-table :is(th,td):nth-child(6)){width:390px!important;min-width:390px!important;max-width:none!important}
+body:not(#sage-upgrade-scope) :is(.owner-history-table :is(th,td):nth-child(7)){width:190px!important;min-width:190px!important;max-width:none!important;padding-left:22px!important}
+body:not(#sage-upgrade-scope) :is(.owner-history-table :is(th,td):nth-child(8)){width:190px!important;min-width:190px!important;max-width:none!important;padding-left:22px!important}
+body:not(#sage-upgrade-scope) :is(.staff-history-table :is(th,td):nth-child(5)){min-width:390px!important}
+body:not(#sage-upgrade-scope) :is(.staff-history-table :is(th,td):nth-child(6),.staff-history-table :is(th,td):nth-child(7)){min-width:190px!important;padding-left:22px!important}
+body:not(#sage-upgrade-scope) :is(:is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money)){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;min-width:0!important;width:100%!important;gap:6px!important}
+body:not(#sage-upgrade-scope) :is(:is(.history-money-grid,.staff-history-money)>span){min-width:0!important;padding:8px!important}
+body:not(#sage-upgrade-scope) :is(:is(.history-money-grid,.staff-history-money) b){white-space:normal!important;overflow-wrap:anywhere!important}
+body:not(#sage-upgrade-scope) :is(:is(.owner-history-table,.staff-history-table) .status){display:inline-flex!important;position:static!important;margin:0 0 8px!important}
+body:not(#sage-upgrade-scope) :is(:is(.history-completed-time,.staff-history-table td>small)){display:block!important;line-height:1.5!important;white-space:normal!important}
+body:not(#sage-upgrade-scope) :is(:is(.history-evidence-actions,.staff-history-evidence)){display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
+body:not(#sage-upgrade-scope) :is(.evidence-table-button){display:inline-flex!important;align-items:center!important;gap:8px!important;white-space:nowrap!important}
+body:not(#sage-upgrade-scope) :is(.evidence-table-button svg){position:static!important;width:18px!important;height:18px!important;flex:0 0 18px!important}
+body:not(#sage-upgrade-scope) :is(.main-content){padding-bottom:100px!important}
+@media(min-width:901px){
+body:not(#sage-upgrade-scope) :is(.floating-actions){bottom:18px!important;right:18px!important;display:flex!important;gap:10px!important;align-items:center!important}
+body:not(#sage-upgrade-scope) :is(.floating-actions>.floating-action){position:relative!important;inset:auto!important;display:flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px!important;padding:0!important}
+body:not(#sage-upgrade-scope) :is(.floating-actions .floating-action-icon){position:static!important;display:grid!important;place-items:center!important;width:32px!important;height:32px!important;margin:0!important}
+body:not(#sage-upgrade-scope) :is(.floating-actions .floating-action-label){display:none!important}
+body:not(#sage-upgrade-scope) :is(.sage-greeting-active::after){content:'|';color:var(--blue);animation:sage-greeting-blink .7s steps(1) infinite;margin-left:2px}
+}
+@keyframes sage-greeting-blink{50%{opacity:0}}
+@media(max-width:900px){
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:12px 0!important}
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics>article){min-width:0!important;min-height:92px!important;padding:12px 42px 12px 12px!important;border-radius:12px!important}
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics>article>span:first-of-type){font-size:10px!important;line-height:1.3!important;display:block!important}
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics>article>strong){font-size:clamp(16px,3.3vw,24px)!important;line-height:1.25!important;margin-top:8px!important;white-space:normal!important;overflow-wrap:anywhere!important}
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics>article>.sage5-kpi-glyph){width:25px!important;height:25px!important;inset:10px 8px auto auto!important}
+body:not(#sage-upgrade-scope) :is(.sage-business-reports .control-metrics>article>.sage-ref-signal){width:32px!important;height:12px!important;inset:auto 8px 8px auto!important;transform:none!important}
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span,
+ :is(.income-insight-grid,.expense-insight-grid)>article,.finance-kpi){padding-right:68px!important}
+body:not(#sage-upgrade-scope) :is(:is(.money-filter-summary,.finance-workbook-summary)>span>.sage-ref-signal,
+ :is(.income-insight-grid,.expense-insight-grid)>article>.sage-ref-signal,.finance-kpi.sage-ref-card>.sage-ref-signal){width:42px!important;height:15px!important;right:10px!important;bottom:8px!important;top:auto!important}
+}
+@media(prefers-reduced-motion:reduce){
+body:not(#sage-upgrade-scope) :is(.sage-greeting-active::after){animation:none!important}}
+
+/* ==========================================================================
+   MOBILE LIVE PULSE — dock at the bottom margin instead of viewport centre.
+   Shared host covers owner, staff and individual workspaces on every page.
+   ========================================================================== */
+@media(max-width:900px){
+ body:not(#sage-upgrade-scope) .sage-live-notification-host{
+  position:fixed!important;top:auto!important;bottom:0!important;
+  left:50%!important;right:auto!important;transform:translateX(-50%)!important;
+  width:min(342px,calc(100vw - 24px))!important;margin:0!important;
+ }
+ body:not(#sage-upgrade-scope) .sage-live-notification{
+  margin:0!important;width:100%!important;box-sizing:border-box!important;
+  border-radius:14px 14px 0 0!important;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  max-height:min(43dvh,390px)!important;overflow-y:auto!important;
+  box-shadow:0 -4px 18px rgba(15,23,42,.10)!important;
+ }
+}
+
+/* ==========================================================================
+   DESKTOP GREETING — separate stable rows prevent the business name shifting.
+   Keep the row after completion too, so finishing cannot move the name either.
+   ========================================================================== */
+@media(min-width:901px){
+ body:not(#sage-upgrade-scope) [data-sage-greeting]{
+  display:block!important;min-height:3.2em!important;line-height:1.6!important;
+  font:inherit!important;white-space:normal!important;
+ }
+ body:not(#sage-upgrade-scope) .dashboard-heading-copy p:has(>[data-sage-greeting]){
+  display:block!important;min-width:0!important;
+ }
+ body:not(#sage-upgrade-scope) .dashboard-heading-copy [data-sage-greeting]+span{
+  display:block!important;margin:0!important;
+ }
+}

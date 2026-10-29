@@ -1,0 +1,14 @@
+{# Desktop context/actions are separate from the approved phone layout. #}
+{% set desk = namespace(section='Workspace') %}{% for section in nav_items %}{% for item in section['items'] %}{% if item.page == page %}{% set desk.section=section.section %}{% endif %}{% endfor %}{% endfor %}
+<div class="d8-contextbar" data-ui-static data-desktop-only>
+  <div class="d8-breadcrumb"><span class="d8-breadcrumb-mark"><svg aria-hidden="true"><use href="#i-{{ 'analytics' if page in ['dashboard','analytics','reports','business_reports'] else 'shield' if page in ['audit','compliance','settings'] else 'users' if page in ['staff','customers','suppliers','departments','branches','payroll'] else 'briefcase' if page in ['workspace','operations','catalog','inventory','assets','stock','events','fulfillment','procurement'] else 'wallet' }}"/></svg></span><div><small>{{ desk.section }}</small><strong>{{ current_user.organization.name }}</strong></div></div>
+  <div class="d8-context-actions"><span class="d8-scope"><i></i>{{ 'Management view' if operational_access.owner_observer else 'Individual workspace' if operational_access.individual_owner else current_user.role_label }}</span><span class="d8-view-time" data-desktop-view-time title="Time this workspace was opened, in your local time zone">Viewed now</span><label class="d8-section-select"><svg aria-hidden="true"><use href="#i-reports"/></svg><select data-desktop-jump aria-label="Jump to workspace section"><option value="">Workspace sections</option></select></label></div>
+</div>
+{% if page in ['income','expenses','finance','audit','staff','requests','inventory','assets','catalog','reports','customers','suppliers','debtors','stock','bills','compliance','payroll','events','branches','daily_close'] %}
+<div class="d8-viewbar" data-ui-static data-desktop-only data-desktop-viewbar>
+  <span class="d8-view-label"><svg aria-hidden="true"><use href="#i-filter"/></svg>Workspace view</span>
+
+  <select data-desktop-saved-views aria-label="Saved filter view"><option value="">Default view</option></select><button type="button" class="d8-quiet" data-desktop-save-view><svg aria-hidden="true"><use href="#i-plus"/></svg>Save filters</button><button type="button" class="d8-quiet" data-desktop-reset-view>Reset view</button><span class="d8-view-feedback" data-desktop-view-feedback role="status" aria-live="polite"></span>
+  <form class="d8-save-popover" data-desktop-save-form hidden><label>Name this filter view<input name="name" maxlength="40" required autocomplete="off" placeholder="e.g. This month · Sales"></label><div><button type="button" data-desktop-save-cancel>Cancel</button><button type="submit">Save view</button></div></form>
+</div>
+{% endif %}

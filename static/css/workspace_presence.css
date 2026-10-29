@@ -1,0 +1,2 @@
+/* New desktop chrome never participates in the approved phone layout. */
+@layer sage-foundation{[data-desktop-only]{display:none}}

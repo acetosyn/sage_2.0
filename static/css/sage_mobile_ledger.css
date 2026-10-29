@@ -1,0 +1,123 @@
+@layer sage-mobile {
+/* ==========================================================
+   MOBILE — SEMANTIC MINI-LEDGERS AND COMPACT FILTER SHELVES
+   No row-to-card conversion. All column plans are CSS, present
+   before JS starts. Sticky header has one bounded scroll region.
+   ========================================================== */
+@media(max-width:900px){
+  :is(.table-scroll,.table-scroller,.table-wrap,.finance-workbook-scroll,.money-table-scroll,.history-ledger-scroll,.request-ledger-scroll,.staff-history-scroll,.staff-table-wrap,.report-table-scroll,.settings-role-table-wrap,.settings-approval-table-wrap,.platform-table-shell,.platform-login-table-wrap,.platform-admin-table-wrap){display:block!important;position:relative!important;max-width:100%!important;min-width:0!important;width:100%!important;max-height:min(65dvh,540px)!important;overflow:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--muted) transparent;border:1px solid var(--border);border-radius:12px;background:var(--surface);content-visibility:visible!important;contain:none!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table{display:table!important;width:max-content!important;min-width:100%!important;max-width:none!important;table-layout:auto!important;border-collapse:separate!important;border-spacing:0!important;font-variant-numeric:tabular-nums}
+  :is(.main-content,.platform-v2-main,.modal-card) table thead{display:table-header-group!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table tbody{display:table-row-group!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table tr{display:table-row!important;padding:0!important;box-shadow:none!important;border-radius:0!important;background:transparent!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table :is(th,td){display:table-cell!important;min-width:var(--m-col,144px)!important;width:var(--m-col,144px)!important;max-width:var(--m-col,144px)!important;padding:10px 12px!important;text-align:left;vertical-align:middle!important;border-bottom:1px solid var(--border)!important;white-space:normal!important;overflow-wrap:anywhere}
+  :is(.main-content,.platform-v2-main,.modal-card) table th{position:sticky!important;top:40px!important;z-index:3!important;background:var(--surface-2)!important;color:var(--text)!important;font-size:calc(11px * var(--sage-text-scale,1))!important;line-height:1.4!important;letter-spacing:.02em!important;font-weight:800!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table td{position:static!important;left:auto!important;font-size:calc(13px * var(--sage-text-scale,1))!important;line-height:1.45!important;color:var(--text)}
+  :is(.main-content,.platform-v2-main,.modal-card) table td::before{display:none!important;content:none!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table td :is(strong,b,.control-record-link){font-size:inherit!important;line-height:1.45!important;white-space:normal!important;overflow-wrap:anywhere}
+  :is(.main-content,.platform-v2-main,.modal-card) table td small{font-size:calc(11px * var(--sage-text-scale,1))!important;line-height:1.45!important;white-space:normal!important;overflow-wrap:anywhere}
+  :is(.main-content,.platform-v2-main) table :is(th,td):first-child{position:sticky!important;left:0!important;z-index:2!important;background:var(--surface)!important;box-shadow:5px 0 8px -7px #0008}
+  :is(.main-content,.platform-v2-main) table th:first-child{z-index:4!important;background:var(--surface-2)!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table td[colspan]{min-width:0!important;max-width:none!important;padding:24px 14px!important;text-align:center!important;position:static!important;box-shadow:none!important;background:var(--surface)!important}
+  :is(.main-content,.platform-v2-main,.modal-card) table tr[hidden]{display:none!important}
+  .sage5-th-wrap{gap:6px!important}.sage5-th-wrap>i{display:none!important}.sage5-th-wrap>b{font-size:inherit!important;white-space:normal!important}
+  :is(.main-content,.platform-v2-main) table :is(.status,.status-badge,.income-type,.expense-type,.platform-status){padding:5px 8px!important;font-size:11px!important;line-height:1.3!important;white-space:nowrap!important}
+  :is(.main-content,.platform-v2-main) table td :is(.btn,button.evidence,a.evidence){min-height:36px!important;height:auto!important;padding:8px!important;font-size:12px!important;white-space:normal!important}
+  :is(.main-content,.platform-v2-main) table td :is(.finance-money,.money-amount-cell,.market-currency-amount){font-size:calc(14px * var(--sage-text-scale,1))!important;line-height:1.4!important;white-space:nowrap!important;overflow-wrap:normal}
+
+  /* Explicit column plans; amount columns always retain full precision. */
+  .finance-workbook-table :is(th,td):nth-child(1){--m-col:136px}.finance-workbook-table :is(th,td):nth-child(2){--m-col:110px}.finance-workbook-table :is(th,td):nth-child(3){--m-col:220px}.finance-workbook-table :is(th,td):nth-child(4){--m-col:170px}.finance-workbook-table :is(th,td):nth-child(5){--m-col:150px}.finance-workbook-table :is(th,td):nth-child(6){--m-col:160px}.finance-workbook-table :is(th,td):nth-child(7){--m-col:160px}.finance-workbook-table :is(th,td):nth-child(8){--m-col:100px}.finance-workbook-table :is(th,td):nth-child(9){--m-col:160px}
+  .money-ledger-table :is(th,td):nth-child(1){--m-col:136px}.money-ledger-table :is(th,td):nth-child(2){--m-col:110px}.money-ledger-table :is(th,td):nth-child(3){--m-col:220px}.money-ledger-table :is(th,td):nth-child(4){--m-col:160px}.money-ledger-table :is(th,td):nth-child(5){--m-col:150px}.money-ledger-table :is(th,td):nth-child(6){--m-col:160px}.money-ledger-table :is(th,td):nth-child(7){--m-col:160px}.money-ledger-table :is(th,td):nth-child(8){--m-col:170px}.money-ledger-table :is(th,td):last-child{--m-col:160px}
+  .finance-workbook-table td:last-child,.money-ledger-table td:last-child{max-width:none!important;width:auto!important;white-space:nowrap!important}
+  .request-ledger :is(th,td):first-child,.owner-history-table :is(th,td):first-child,.staff-history-table :is(th,td):first-child{--m-col:48px}
+  .request-ledger :is(th,td):nth-child(2),.owner-history-table :is(th,td):nth-child(2),.staff-history-table :is(th,td):nth-child(2){--m-col:200px}
+  .report-ledger-table :is(th,td):first-child{--m-col:150px}.report-ledger-table :is(th,td):nth-child(3){--m-col:200px}
+  .operations-table :is(th,td):nth-child(2){--m-col:210px}.platform-organization-table :is(th,td):first-child{--m-col:160px}
+  .modal-card :is(.table-scroll,.table-wrap,.table-scroller,.finance-workbook-scroll){max-height:none!important;overflow-y:hidden!important}
+
+  :is(.table-scroll,.table-scroller,.table-wrap,.money-table-scroll,.finance-workbook-scroll,.request-ledger-scroll,.history-ledger-scroll,.staff-history-scroll,.report-table-scroll,.audit-feed)::before{content:'Data register';display:flex;align-items:center;position:sticky;top:0;left:0;z-index:6;width:100%;min-height:40px;box-sizing:border-box;padding:8px 96px 8px 12px;color:var(--muted);background:var(--surface);border-bottom:1px solid var(--border);font-size:11px;line-height:1.4;white-space:nowrap}.m-can-scroll::before{content:'Swipe columns ↔'!important}
+  :is(.table-scroll,.table-scroller,.table-wrap,.money-table-scroll,.finance-workbook-scroll,.audit-feed){scroll-snap-type:x proximity}thead th{scroll-snap-align:start;scroll-margin-inline-start:136px}thead th:first-child{scroll-snap-align:none}.staff-management-table th{scroll-margin-inline-start:272px}.staff-management-table th:nth-child(2){scroll-snap-align:none}
+
+  /* Swipe hints and edge shadows are interaction feedback, never sizing. */
+  .mobile-ledger-hint{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0;color:var(--muted);font-size:11px;line-height:1.4}.mobile-ledger-hint span:last-child{font-size:16px;color:var(--blue)}
+  .m-scroll-left{box-shadow:inset 8px 0 8px -9px var(--text)}.m-scroll-right{border-right-color:color-mix(in srgb,var(--blue) 50%,var(--border))}
+  .mobile-ledger-hint[hidden]{display:none}
+
+  /* Filter shelves: 36px controls with space for focus / touch interaction. */
+  .money-filter-shell,.finance-workbook-filters{display:flex!important;grid-template-columns:none!important;align-items:flex-end!important;flex-wrap:nowrap!important;width:100%!important;min-width:0!important;max-width:100%!important;gap:8px!important;padding:12px!important;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;scrollbar-width:thin}
+  .money-filter-shell>label,.finance-workbook-filters>label{position:relative;display:grid!important;flex:0 0 124px!important;width:124px!important;min-width:124px!important;grid-column:auto!important;gap:6px!important;scroll-snap-align:start}
+  .money-filter-shell>.money-search-field,.finance-workbook-filters>.finance-workbook-search{flex-basis:168px!important;width:168px!important;min-width:168px!important}
+  .money-filter-shell label>span,.finance-workbook-filters label>span{font-size:11px!important;line-height:1.4!important;letter-spacing:0!important;white-space:nowrap!important}.sage5-filter-icon{display:none!important}
+  :is(.money-filter-shell,.finance-workbook-filters) :is(input,select,.inline-search){box-sizing:border-box;width:100%!important;min-width:0!important;height:var(--m-control-h)!important;min-height:var(--m-control-h)!important;max-height:var(--m-control-h)!important;margin:0!important;padding:0 8px!important;font-size:14px!important;line-height:1.3!important;border-radius:9px!important}
+  :is(.money-filter-shell,.finance-workbook-filters) .inline-search{display:flex!important;align-items:center;padding:0 8px!important;gap:6px!important}.inline-search svg{width:16px;flex-shrink:0}
+  :is(.money-filter-shell,.finance-workbook-filters) .inline-search input{font-size:16px!important;padding:0!important;border:0!important}.money-filter-shell input[type=date],.finance-workbook-filters input[type=date]{font-size:12px!important}
+  .money-clear-filter,.finance-workbook-clear{flex:0 0 76px!important;width:76px!important;min-width:76px!important;max-width:76px!important;height:36px!important;min-height:36px!important;margin:0!important;padding:6px!important;align-self:flex-end!important;white-space:nowrap!important;font-size:0!important}
+  .money-clear-filter::after,.finance-workbook-clear::after{content:'Clear';font-size:13px;font-weight:750}.money-clear-filter svg,.finance-workbook-clear svg{width:14px!important;height:14px!important}
+  .money-filter-result,.finance-workbook-result{min-width:72px!important;padding:10px!important}.money-filter-result strong,.finance-workbook-result strong{font-size:24px!important}.money-filter-result span,.finance-workbook-result span{font-size:11px!important}
+  .table-pagination,.pagination,.money-register-pagination{display:flex;gap:6px!important;align-items:center;flex-wrap:wrap;padding:10px!important;font-size:12px!important}.pagination button,.table-pagination button{min-width:40px;min-height:40px}
+}
+
+}
+
+/* ==========================================================================
+   MOBILE REQUEST HISTORY — compact spreadsheet rows and full-width amounts.
+   Keep these rules inside the existing mobile layer: layered !important rules
+   take precedence over the unlayered visual upgrades.
+   ========================================================================== */
+@layer sage-mobile {
+ @media(max-width:900px){
+  /* Shared ledger readability: wrap at spaces, never through words or money. */
+  :is(.main-content,.platform-v2-main,.modal-card) table :is(th,td),
+  :is(.main-content,.platform-v2-main,.modal-card) table td :is(strong,b,small,.control-record-link){
+   word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;
+  }
+  :is(.main-content,.platform-v2-main,.modal-card) table td :is(.finance-money,.money-amount-cell,.market-money-value,.market-currency-amount){
+   white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;
+  }
+
+  /* Explicit widths match both headers and cells, including the staff variant. */
+  .main-content .owner-history-table :is(th,td):nth-child(1),.main-content .staff-history-table :is(th,td):nth-child(1){--m-col:48px}
+  .main-content .owner-history-table :is(th,td):nth-child(2),.main-content .staff-history-table :is(th,td):nth-child(2){--m-col:200px}
+  .main-content .owner-history-table :is(th,td):nth-child(3){--m-col:150px}
+  .main-content .owner-history-table :is(th,td):nth-child(4),.main-content .staff-history-table :is(th,td):nth-child(4){--m-col:220px}
+  .main-content .owner-history-table :is(th,td):nth-child(5),.main-content .staff-history-table :is(th,td):nth-child(3){--m-col:260px}
+  .main-content .owner-history-table :is(th,td):nth-child(6),.main-content .staff-history-table :is(th,td):nth-child(5){--m-col:500px}
+  .main-content .owner-history-table :is(th,td):nth-child(7),.main-content .staff-history-table :is(th,td):nth-child(6){--m-col:190px}
+  .main-content .owner-history-table :is(th,td):nth-child(8),.main-content .staff-history-table :is(th,td):nth-child(7){--m-col:220px}
+  .main-content :is(.owner-history-table,.staff-history-table){width:max-content!important;min-width:100%!important;table-layout:auto!important}
+  .main-content :is(.owner-history-table,.staff-history-table) :is(th,td){
+   width:var(--m-col)!important;min-width:var(--m-col)!important;max-width:none!important;
+   box-sizing:border-box!important;padding:9px 12px!important;border-right:1px solid var(--border)!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) tr{height:auto!important;min-height:0!important}
+  .main-content :is(.owner-history-table,.staff-history-table) th{height:40px!important;white-space:nowrap!important}
+  .main-content :is(.owner-history-table,.staff-history-table) td{font-size:12px!important;line-height:1.4!important}
+  .main-content :is(.owner-history-table,.staff-history-table) td :is(b,strong,small,.control-record-link){line-height:1.4!important}
+  .main-content :is(.owner-history-table,.staff-history-table) td:not(:first-child){position:static!important;left:auto!important;box-shadow:none!important}
+  .main-content :is(.owner-history-table,.staff-history-table) tbody tr:nth-child(even)>td{background:var(--surface-2)!important}
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money){
+   display:grid!important;grid-template-columns:repeat(4,minmax(104px,1fr))!important;gap:0!important;
+   width:100%!important;min-width:464px!important;align-items:center!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money)>span{
+   display:block!important;width:auto!important;min-width:0!important;min-height:0!important;height:auto!important;
+   padding:4px 10px!important;border:0!important;border-right:1px solid var(--border)!important;
+   border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money)>span:last-child{border-right:0!important}
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money) small{
+   display:block!important;font-size:10px!important;margin:0 0 5px!important;white-space:nowrap!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-money-grid,.staff-history-money) b{
+   display:block!important;font-size:12px!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) :is(.history-evidence-actions,.staff-history-evidence){
+   display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:6px!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) .evidence-table-button{
+   min-height:34px!important;padding:6px 8px!important;white-space:nowrap!important;font-size:11px!important;
+  }
+  .main-content :is(.owner-history-table,.staff-history-table) .history-completed-time{max-width:none!important;margin-top:5px!important}
+  .main-content :is(.history-ledger-scroll,.staff-history-scroll){scroll-snap-type:none!important}
+ }
+}
