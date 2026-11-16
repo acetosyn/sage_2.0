@@ -75,7 +75,7 @@ def register_owner(payload, logo_file=None):
 
     owner = User(organization_id=organization.id, department_id=first_department.id if workspace_mode == "individual" and first_department else None, first_name=(payload.get("first_name") or "").strip(), middle_name=(payload.get("middle_name") or "").strip() or None, last_name=(payload.get("last_name") or "").strip(), sex=(payload.get("sex") or "").strip() or None, date_of_birth=parse_date(payload.get("date_of_birth")), phone=(payload.get("phone") or "").strip() or None, email=email, address=(payload.get("address") or "").strip() or None, position="Business Owner" if workspace_mode == "individual" else "Organization Owner", role="owner", status="active")
     if not owner.first_name or not owner.last_name: raise ValueError("First name and last name are required.")
-    owner.set_password(payload.get("password")); db.session.add(owner); db.session.flush(); logo_file = clean_logo_upload(logo_file)
+    owner.set_password(payload.get("password")); db.session.add(owner); db.session.flush(); logo_file = None if str(payload.get("no_logo", "")).lower() in {"true","on","1"} else clean_logo_upload(logo_file)
     if logo_file: save_attachment(current_app, logo_file, owner, "organization", organization.id, kind="organization_logo", final=True)
     create_audit(organization.id, owner.id, "owner_registered", f"{owner.display_name} created a SAGE {workspace_mode} workspace."); db.session.commit(); return owner
 

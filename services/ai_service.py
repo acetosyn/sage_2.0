@@ -36,7 +36,7 @@ def _live_context(user):
 # OPENAI CHAT
 # ==========================================================
 
-def ask_vision_ai(app, user, message, history=None):
+def ask_vision_ai(app, user, message, history=None, streaming=False):
     api_key = (app.config.get("OPENAI_API_KEY") or "").strip(); model = (app.config.get("OPENAI_MODEL_SOLVER") or "gpt-5.4").strip()
     if not api_key or api_key.lower().startswith("sk-xxxx"): raise RuntimeError("OpenAI is not configured yet. Paste the real OPENAI_API_KEY into .env and restart SAGE.")
 
@@ -55,5 +55,17 @@ def ask_vision_ai(app, user, message, history=None):
         role = item.get("role") if item.get("role") in {"user", "assistant"} else "user"; content = str(item.get("content") or "").strip()
         if content: input_items.append({"role": role, "content": content})
     input_items.append({"role": "user", "content": message})
-    client = OpenAI(api_key=api_key); response = client.responses.create(model=model, instructions=instructions, input=input_items)
+    client = OpenAI(api_key=api_key)
+    if streaming: return client.responses.create(model=model, instructions=instructions, input=input_items, stream=True), model
+    response = client.responses.create(model=model, instructions=instructions, input=input_items)
     return (response.output_text or "I could not produce a response.").strip(), model
+
+
+def stream_vision_ai(app,user,message,history=None):
+    events,model=ask_vision_ai(app,user,message,history,streaming=True)
+    try:
+        for event in events:
+            if event.type=='response.output_text.delta':yield {'delta':event.delta}
+            elif event.type in {'error','response.failed','response.incomplete'}:raise RuntimeError('Response interrupted. Please retry.')
+        yield {'done':True,'model':model}
+    finally:events.close()

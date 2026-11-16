@@ -1,0 +1,8 @@
+/* Small progressive enhancements; no form names, values or submit flows change. */
+(()=>{'use strict';
+ const examples={title:'Give this record a clear name',phone:'e.g. 0801 234 5678',email:'name@example.com',unit:'e.g. plate, piece or session',notes:'Add a useful note (optional)',client:'Enter the client’s name',partner:'Enter brand or partner name',description:'What is this payment for?'};
+ function polish(root=document){root.querySelectorAll('.solo-form input,.modal-card input,.v4-modal-content input').forEach(input=>{if(input.dataset.finishReady)return;input.dataset.finishReady='1';if(input.type==='number'&&!input.inputMode)input.inputMode='decimal';if(!input.placeholder&&examples[input.name]&&['text','tel','email'].includes(input.type))input.placeholder=examples[input.name];});}
+ let pending=false;const observer=new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;polish();});});polish();observer.observe(document.body,{childList:true,subtree:true});document.addEventListener('sage:page-ready',()=>polish());
+})();
+/* Filter current list only. Existing edit, movement and archive handlers remain delegated. */
+document.addEventListener('input',event=>{if(!event.target.matches('[data-solo-list-search]'))return;const root=event.target.closest('.solo-app'),query=event.target.value.trim().toLocaleLowerCase();let visible=0;root.querySelectorAll('[data-list-title]').forEach(row=>{row.hidden=!row.dataset.listTitle.toLocaleLowerCase().includes(query);if(!row.hidden)visible++;});const count=root.querySelector('[data-solo-list-count]'),empty=root.querySelector('.solo-list-no-match');if(count)count.textContent=`${visible} record${visible===1?'':'s'}`;if(empty)empty.hidden=visible!==0||!query;});

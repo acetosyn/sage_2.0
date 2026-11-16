@@ -22,3 +22,4 @@ from models.business import EmployeeProfile, StaffAdvance, ExpenseClaim, Payroll
 from models.business import EventTransfer
 
 __all__ = ["Organization", "OrganizationWorkspace", "Department", "User", "StaffInvitation", "AuditLog", "PurchaseRequest", "RequestItem", "RequestFunding", "RequestBalanceTransaction", "PurchaseFulfillment", "FulfillmentLine", "Attachment", "CatalogItem", "InventoryItem", "StockMovement", "AssetItem", "AssetMovement", "FinancialRecord", "Notification", "ActivityEvent", "DepartmentOperation", "StaffReport", "PlatformOwnerControl", "PlatformAdminAudit", "FinanceAccount", "FinanceLedgerEntry", "BudgetAllocation", "FinanceReceivable", "FinancePayable", "FinanceReconciliation", "PayrollEntry", "TaxEntry", "FinanceForecast", "FinancePerformanceTarget", "PushSubscription", "Supplier", "BranchLocation", "BranchDepartment", "ApprovalRule", "AuditRevision"]
+from models.entrepreneur import SoloRecord, SoloEntry

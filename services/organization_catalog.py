@@ -74,6 +74,15 @@ INDIVIDUAL_BUSINESS_TYPES = [
     {"key":"freelance","label":"Freelance / Remote Professional","group":"Professional & Digital","catalog_key":"professional_services","primary_department":"Client Services"},
     {"key":"other","label":"Other / Custom Individual Business","group":"Other","catalog_key":"other","primary_department":"Administration"},
 ]
+INDIVIDUAL_BUSINESS_TYPES[-1:-1] = [
+    {"key":key,"label":label,"group":group,"catalog_key":catalog,"primary_department":"My Business"}
+    for key,label,group,catalog in [
+        ("influencer","Social Media Influencer / Brand Creator","Creative & Media","media_creative"),
+        ("laundry","Laundry / Dry Cleaning","Lifestyle & Beauty","professional_services"),
+        ("phone_repairs","Phone / Gadget Repairs","Professional & Digital","technology"),
+        ("cleaning","Home / Office Cleaning","Transport & Field Services","professional_services"),
+        ("data_airtime","Data / Airtime Reseller","Professional & Digital","technology"),
+        ("perfume","Perfume / Fragrance Seller","Trade & Retail","retail")]]
 INDIVIDUAL_BUSINESS_TYPE_MAP = {item["key"]: item for item in INDIVIDUAL_BUSINESS_TYPES}
 
 

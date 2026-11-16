@@ -65,12 +65,19 @@ def allowed_pages(user):
         if ComplianceDocument.query.filter_by(organization_id=user.organization_id,responsible_id=user.id).first():allowed.add('compliance')
         if ImprestFund.query.filter_by(organization_id=user.organization_id,holder_id=user.id,status='active').first():allowed.add('imprest')
     if 'inventory' in allowed:allowed.add('stock')
+    profile=getattr(getattr(user,'organization',None),'workspace_profile',None)
+    if user.role=='owner' and profile and profile.workspace_mode=='individual':
+        from services.entrepreneur_catalog import FEATURES
+        allowed.update({'solo_'+key for key in FEATURES})
     return allowed
 
 def can_access_page(user, page): return bool(user and user.is_authenticated and page in allowed_pages(user))
 
 def filter_navigation(nav_items, user):
     allowed, filtered = allowed_pages(user), []; profile = getattr(getattr(user, "organization", None), "workspace_profile", None); individual_owner = bool(user.role == "owner" and profile and profile.workspace_mode == "individual")
+    if individual_owner:
+        from services.entrepreneur_catalog import solo_navigation
+        return solo_navigation(user)
     for section in nav_items:
         items = [dict(item) for item in section["items"] if item["page"] in allowed and not (individual_owner and item["page"] in {"requests", "departments"})]
         for item in items:

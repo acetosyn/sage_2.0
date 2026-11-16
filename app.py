@@ -24,7 +24,7 @@ from packages.database import db, init_database
 from packages.security import init_security, roles_required
 from services.access_control import allowed_pages, can_access_page, filter_navigation, is_owner_admin
 from services.operational_policy import can_operate, operational_context, require_operational
-from services.ai_service import ask_vision_ai
+from services.ai_service import ask_vision_ai, stream_vision_ai
 from services.auth_service import authenticate, change_password, create_staff_invitation, register_owner, register_staff
 from services.department_capabilities import department_profile, role_focus
 from services.department_service import create_department
@@ -185,6 +185,8 @@ with app.app_context():
         if "display_currency" not in organization_columns:
             with db.engine.begin() as connection: connection.execute(text("ALTER TABLE organizations ADD COLUMN display_currency VARCHAR(12)"))
     except Exception as exc: app.logger.warning("Currency display schema check skipped: %s", exc)
+    from models import SoloRecord, SoloEntry
+    db.metadata.create_all(bind=db.engine,tables=[SoloRecord.__table__,SoloEntry.__table__],checkfirst=True)
     # Request-balance ledger is a new standalone table. Create it safely on upgrade even where production disables blanket db.create_all(); existing tables are never altered here.
     RequestBalanceTransaction.__table__.create(bind=db.engine, checkfirst=True); PlatformOwnerControl.query.filter(PlatformOwnerControl.status.in_(["restricted", "deleted"])).update({"status": "disabled"}, synchronize_session=False); db.session.commit(); print(f"[SAGE] Database backend: {app.extensions.get('vision_database_label', database_label)}")
     for warning in production_warnings(app): app.logger.warning("PRODUCTION CHECK: %s", warning)
@@ -192,6 +194,8 @@ with app.app_context():
 install_audit_tracking(app)
 register_control_routes(app)
 register_business_routes(app)
+from modules.entrepreneur_routes import register_entrepreneur_routes
+register_entrepreneur_routes(app)
 
 @app.before_request
 def bind_audit_actor():
@@ -201,7 +205,11 @@ def bind_audit_actor():
 # SHARED PAGE CONTEXT / TENANT SCOPING
 # ==========================================================
 
+from services.entrepreneur_catalog import FEATURES as SOLO_FEATURES
+for key, (title, subtitle, icon) in SOLO_FEATURES.items(): PAGE_TITLES['solo_'+key] = (title, subtitle)
 PAGES = set(PAGE_TITLES.keys())
+for solo_key in SOLO_FEATURES:
+    app.add_url_rule('/solo_'+solo_key, 'solo_page_'+solo_key, login_required(lambda page='solo_'+solo_key: render_vision_page(page)))
 
 # ==========================================================
 # STRICT TENANT SESSION / CACHE FIREWALL
@@ -323,6 +331,10 @@ def page_context(page):
     context = {"page": page, "page_title": title, "currency_display": currency_display, "currency_options": SUPPORTED_CURRENCIES, "page_subtitle": subtitle, "nav_items": filter_navigation(NAV_ITEMS, current_user), "departments": departments, "organization_departments": organization_departments, "asset_custodians": User.query.filter_by(organization_id=current_user.organization_id, status="active").order_by(User.first_name.asc(), User.last_name.asc()).all(), "staff_users": staff_users, "archived_staff_users": archived_staff_users, "staff_stats": staff_stats, "owner_admin": owner_admin, "operational_access": operational_context(current_user), "business_types": BUSINESS_TYPES, "live_requests": live_requests, "request_counts": request_counts, "inventory_items": inventory_items, "asset_items": asset_items, "asset_value": sum(item.total_value for item in asset_items), "asset_movements": _asset_movements_for_user(current_user), "stock_movements": _stock_movements_for_user(current_user), "granted_requests": [row for row in live_requests if row.status in {"approved", "money_sent", "fulfilled", "verified"}], "activity_events": activity_events, "fulfillment_attachments": fulfillment_attachments, "fulfillment_evidence": fulfillment_evidence, "finance_summary": finance_summary(current_user.organization_id), "catalog_items": custom_catalog_items, "request_catalog_items": request_catalog_items, "department_catalog": department_catalog_info, "organization_catalog": organization_catalog_summary(current_user.organization.business_type), "notifications": Notification.query.filter_by(organization_id=current_user.organization_id, user_id=current_user.id).order_by(Notification.created_at.desc()).limit(12).all(), "unread_notifications": Notification.query.filter_by(organization_id=current_user.organization_id, user_id=current_user.id, is_read=False).count(), "workspace_profile": workspace_profile_data, "role_focus": role_focus(current_user.position or current_user.role_label, department_name), "finance_types": sorted(FINANCE_TYPES), "operation_templates": operation_templates, "department_operations": department_operations, "staff_reports": staff_reports, "today_report_metrics": today_report_metrics, "week_report_metrics": week_report_metrics, "month_report_metrics": month_report_metrics, "quarter_report_metrics": quarter_report_metrics, "finance_control": finance_control_context(current_user) if page in {"finance", "income", "expenses"} and (current_user.role in {"owner", "admin", "finance"} or can_operate(current_user, "finance_ops")) else None, "income_workspace": income_workspace_context(current_user) if page == "income" or (page == "dashboard" and owner_admin) else None, "expense_workspace": expense_workspace_context(current_user) if page == "expenses" or (page == "dashboard" and owner_admin) else None, "request_funds": request_funds, "request_balance_map": request_balance_map, "performance_targets": performance_target_context(current_user) if page in {"income", "dashboard"} and owner_admin else None, "reporting": reporting_context(current_user) if page == "reports" else None, "financial_intelligence": reporting_context(current_user) if page in {"dashboard", "requests", "fulfillment"} else None, "push_enabled": push_enabled(app), "sage_workspace": sage_workspace, "workspace_mode": sage_workspace["mode"], "individual_business": individual_business, "request_management": request_management, "executive_management": executive_management, "procurement_management": procurement_management_context(current_user) if page == "procurement" and owner_admin else None, "management_settings": management_settings_context(current_user) if page == "settings" and owner_admin else None, "branch_management": branch_comparison_context(current_user) if page == "reports" and owner_admin else None, "audit_revisions": audit_revision_context(current_user) if page == "audit" and owner_admin else None, "audit_timeline": audit_timeline_context(current_user, activity_events) if page == "audit" else None, "management_anomalies": management_anomaly_context(current_user) if page in {"analytics", "audit"} and owner_admin else None, "boot_briefing": boot_briefing}
     context.update(owner_dashboard_context(current_user)); context.update({"analytics": analytics_context(current_user), "staff_finance": scoped_finance_summary(current_user), "approval_permissions": {row.id: can_actor_approve_request(current_user, row)[0] for row in live_requests if row.status == 'submitted'}})
     context.update(business_context(current_user,page))
+    if sage_workspace['is_individual'] and current_user.role == 'owner':
+        from services.entrepreneur_service import solo_context
+        context['solo'] = solo_context(current_user, page[5:] if page.startswith('solo_') else 'home')
+        if page == 'dashboard': context['page_title'] = context['solo']['profile']['home']
     from flask import g
     limits=getattr(g,'sage_branch_limits',None)
     if limits:
@@ -1320,6 +1332,14 @@ def sage_retention(dry_run):
 def api_ai_chat():
     payload = request.get_json(silent=True) or {}; message = str(payload.get("message") or "").strip()
     if not message: return json_error("Type a message for SAGE AI.")
+    if payload.get('stream'):
+        def generate():
+            try:
+                for item in stream_vision_ai(app,current_user,message,payload.get('history') or []): yield json.dumps(item)+'\n'
+            except Exception:
+                app.logger.exception('AI stream failed')
+                yield json.dumps({'error':'SAGE AI could not complete the response. Check configuration or retry.'})+'\n'
+        return Response(stream_with_context(generate()),mimetype='application/x-ndjson',headers={'X-Accel-Buffering':'no','Cache-Control':'no-cache'})
     try:
         answer, model = ask_vision_ai(app, current_user, message, payload.get("history") or []); return jsonify({"ok": True, "answer": answer, "model": model})
     except RuntimeError as error: return json_error(error, 503)

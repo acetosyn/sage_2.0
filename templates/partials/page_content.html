@@ -1,2 +1,6 @@
-{% include 'partials/desktop_workspace.html' %}
+{% if solo is defined and (page == 'dashboard' or page.startswith('solo_')) %}
+{% include 'pages/entrepreneur.html' %}
+{% else %}
+{% if not sage_workspace.is_individual %}{% include 'partials/desktop_workspace.html' %}{% endif %}
 {% include 'pages/' ~ page ~ '.html' %}
+{% endif %}
